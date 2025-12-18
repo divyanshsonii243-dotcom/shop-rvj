@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gold and Silver Prices</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+
+
+
+body {
+  background-image: url('https://www.antarajewellery.com/wp-content/uploads/2025/04/Antara-Jan0092_v2-1-scaled.jpg');
+    background-color: #c5aaaa;
+  background-size: cover;
+  background-position: center;
+  text-align: center;
+ 
+}
+
+
+        .container { max-width: 800px; margin: auto; background: rgb(18, 18, 18); padding: 20px; border-radius: 8px; box-shadow: 0 0 10px;color: #fcf6f6; }
+        .price { font-size: 24px; margin: 10px 0; }
+        .gold { color: gold; }
+        .silver { color: silver; }
+        button { padding: 10px 15px; margin: 5px; background: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer; }
+        button:hover { background: #0056b3; }
+        .booked { margin-top: 20px; padding: 10px; background: #0b0b0b; border-radius: 4px; color: #f4efef; }
+        .history { max-height: 200px; overflow-y: auto; }
+        ul { list-style-type: none; padding: 0; }
+        li { padding: 5px 0; border-bottom: 1px solid #ddd; }
+        canvas { margin: 20px 0; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Gold and Silver Price Tracker</h1>
+        <div class="price gold">Gold Price: <span id="goldPrice">130000</span></div>
+        <div class="price silver">Silver Price: <span id="silverPrice">142500</span></div>
+        
+        <h2>Book a Price</h2>
+        <p>Click to book the current price (this simulates reserving it for purchase or trade).</p>
+        <button onclick="bookPrice('gold')">Book Gold Price</button>
+        <button onclick="bookPrice('silver')">Book Silver Price</button>
+        
+        <div class="booked">
+            <h3>Booking History</h3>
+            <div class="history">
+                <h4>Gold Bookings</h4>
+                <ul id="goldHistory"></ul>
+                <h4>Silver Bookings</h4>
+                <ul id="silverHistory"></ul>
+            </div>
+        </div>
+        
+        <h2>Gold Price Graph</h2>
+        <canvas id="goldChart" width="400" height="200"></canvas>
+        
+        <h2>Silver Price Graph</h2>
+        <canvas id="silverChart" width="400" height="200"></canvas>
+    </div>
+
+    <nav>
+        <button onclick="showSection('products')"><a href="2.html">BACK</a></button>
+    </nav>
+
+    <script>
+        // Initial prices
+        let goldPrice = 130000;
+        let silverPrice = 142500;
+        const goldMin = 125000, goldMax = 135000;
+        const silverMin = 135000, silverMax = 150000;
+
+        // Data arrays for graphs (last 20 points)
+        let goldData = Array(20).fill(goldPrice);
+        let silverData = Array(20).fill(silverPrice);
+        let labels = Array.from({length: 20}, (_, i) => i + 1);
+
+        // Booking history
+        let goldHistory = [];
+        let silverHistory = [];
+
+        // Update prices randomly
+        function updatePrices() {
+            goldPrice += (Math.random() - 0.5) * 2000; // Fluctuate by up to 1000
+            goldPrice = Math.max(goldMin, Math.min(goldMax, goldPrice));
+            silverPrice += (Math.random() - 0.5) * 2000;
+            silverPrice = Math.max(silverMin, Math.min(silverMax, silverPrice));
+
+            document.getElementById('goldPrice').textContent = goldPrice.toFixed(0);
+            document.getElementById('silverPrice').textContent = silverPrice.toFixed(0);
+
+            // Update graph data
+            goldData.shift();
+            goldData.push(goldPrice);
+            silverData.shift();
+            silverData.push(silverPrice);
+
+            goldChart.update();
+            silverChart.update();
+        }
+
+        // Book a price and add to history
+        function bookPrice(type) {
+            const timestamp = new Date().toLocaleString();
+            if (type === 'gold') {
+                goldHistory.push({ price: goldPrice.toFixed(0), time: timestamp });
+                updateHistory('gold');
+            } else if (type === 'silver') {
+                silverHistory.push({ price: silverPrice.toFixed(0), time: timestamp });
+                updateHistory('silver');
+            }
+        }
+
+        // Update history display
+        function updateHistory(type) {
+            const list = type === 'gold' ? document.getElementById('goldHistory') : document.getElementById('silverHistory');
+            const history = type === 'gold' ? goldHistory : silverHistory;
+            list.innerHTML = history.map(entry => `<li>${entry.price} at ${entry.time}</li>`).join('');
+        }
+
+        // Initialize charts
+        const goldChart = new Chart(document.getElementById('goldChart'), {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Gold Price',
+                    data: goldData,
+                    borderColor: 'gold',
+                    fill: false
+                }]
+            },
+            options: { responsive: true }
+        });
+
+        const silverChart = new Chart(document.getElementById('silverChart'), {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Silver Price',
+                    data: silverData,
+                    borderColor: 'silver',
+                    fill: false
+                }]
+            },
+            options: { responsive: true }
+        });
+
+        // Update every 2 seconds
+        setInterval(updatePrices, 2000);
+    </script>
+</body>
+</html>
+
+
+

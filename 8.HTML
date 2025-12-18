@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional Shop Invoice Generator</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"> <!-- For icons -->
+     
+   
+ <style>
+       body {
+ background-image: url('https://www.antarajewellery.com/wp-content/uploads/2025/04/Antara-Jan0092_v2-1-scaled.jpg');
+  background-position: center;
+ 
+  position: relative;
+  text-align: center;
+  color: white;
+}
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: #0b0b0b;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(255,255,255,0.1);
+        }
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        header h1 {
+             color: #b8860b;
+            font-size: 2.5em;
+            margin: 0;
+        }
+        header p {
+            color: #ccc;
+            font-size: 1.1em;
+        }
+        form {
+            margin-bottom: 30px;
+        }
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            font-weight: bold;
+            color: white;
+            margin-bottom: 5px;
+        }
+        .form-group input, .form-group textarea, .form-group select {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1em;
+            background: #333;
+            color: white;
+        }
+        .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
+            border-color: white;
+            outline: none;
+        }
+        .items-section {
+            margin-bottom: 20px;
+        }
+        .item-row {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr 1fr 0.5fr;
+            gap: 10px;
+            align-items: end;
+            margin-bottom: 10px;
+        }
+        .item-row input, .item-row select {
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background: #333;
+            color: white;
+        }
+        .remove-btn {
+            background: #e74c3c;
+            color: white;
+            border: none;
+            padding: 8px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .add-item-btn {
+            padding: 10px 20px;
+            background: #27ae60;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-bottom: 20px;
+        }
+        button {
+            padding: 15px 30px;
+            background: white;
+            color: black;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.2em;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        button:hover {
+            background: #ccc;
+        }
+        .invoice {
+           
+            border: 2px solid white;
+            padding: 30px;
+            margin-top: 30px;
+            background: rgb(252, 233, 233);
+            border-radius: 10px;
+            color: black;
+        }
+        .header {
+            text-align: center;
+            border-bottom: 1px solid black;
+            padding-bottom: 20px;
+            margin-bottom: 20px;
+        }
+        .header h1 {
+            color: black;
+            font-size: 2em;
+            margin: 10px 0;
+        }
+        .details {
+            margin: 20px 0;
+        }
+        .items {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        .items th {
+            background: black;
+            color: white;
+            padding: 10px;
+            text-align: left;
+        }
+        .items td {
+            padding: 10px;
+            border-bottom: 1px solid #ccc;
+        }
+        .total {
+            text-align: right;
+            margin-top: 20px;
+            font-weight: bold;
+            font-size: 1.2em;
+            color: black;
+        }
+        .print-btn {
+            margin-top: 20px;
+            text-align: center;
+        }
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            background: #333;
+            border-radius: 5px;
+        }
+        footer p {
+            margin: 5px 0;
+            font-size: 0.9em;
+            color: rgb(219, 216, 216);
+        }
+        @media print {
+            body { margin: 0; background: white; color: black; }
+            .container { display: none; }
+            .invoice {
+                display: block;
+                box-shadow: none;
+                background: white;
+                color: black;
+            }
+            .print-btn { display: none; }
+        }
+    </style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </style>
+       
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="r"></i> 🪙RVJ</h1>
+            <p>Online Gold Jewelry Sales - Choose, Customize & Buy Pure 22K Gold</em> | Base ₹125,000 per 10g + 15% GST</p>
+        </header>
+   <div>
+
+    
+   </div> 
+     
+        
+        <form id="invoice-form">
+            <div class="form-group">
+                <label for="shop-name">Shop Name:</label>
+                <input type="text" id="shop-name" value="RVJ" required>
+            </div>
+            <div class="form-group">
+                <label for="shop-address">Shop Address:</label>
+                <input type="text" id="shop-address" value="Bhilwara" required>
+            </div>
+            <div class="form-group">
+                <label for="shop-phone">Shop Phone:</label>
+                <input type="text" id="shop-phone" value="9462243795" required>
+            </div>
+            <div class="form-group">
+                <label for="shop-email">Shop Email:</label>
+                <input type="email" id="shop-email" value="rvj@1235dd" required>
+            </div>
+            <div class="form-group">
+                <label for="invoice-number">Invoice Number:</label>
+                <input type="text" id="invoice-number" value="1234567825" required>
+            </div>
+            <div class="form-group">
+                <label for="invoice-date">Invoice Date:</label>
+                <input type="date" id="invoice-date" required>
+            </div>
+            <div class="form-group">
+                <label for="customer-name">Customer Name:</label>
+                <input type="text" id="customer-name" required>
+            </div>
+            <div class="form-group">
+                <label for="customer-address">Customer Address:</label>
+                <textarea id="customer-address" rows="2" required></textarea>
+            </div>
+            
+            <div class="items-section">
+                <h3>Items (Gold/Silver Calculation)</h3>
+                <div id="items-container">
+                    <div class="item-row">
+                        <input type="text" placeholder="Product Name" value="Gold Necklace" required>
+                        <input type="number" placeholder="Weight (g)" value="10" step="0.01" required>
+                        <input type="number" placeholder="Purity (%)" value="24" min="1" max="100" required>
+                        <select required>
+                            <option value="gold">Gold</option>
+                            <option value="silver">Silver</option>
+                        </select>
+                        
+                        <input type="number" placeholder="Current Rate (₹/g)" value="5000" step="0.01" required>
+                        <button type="button" class="remove-btn" onclick="removeItem(this)">Remove</button>
+                    </div>
+                </div>
+                <button type="button" class="add-item-btn" onclick="addItem()">Add Item</button>
+            </div>
+            
+            <div class="form-group">
+                <label for="tax-rate">Tax Rate (%):</label>
+                <input type="number" id="tax-rate" value="8.25" step="0.01" required>
+            </div>
+            <button type="button" onclick="generateInvoice()"><i class="fas fa-cogs"></i> Generate Professional Invoice</button>
+        </form>
+        
+        <div class="invoice" id="invoice-output">
+            <div class="header">
+                <h1 id="shop-name-display"></h1>
+                <p id="shop-address-display"></p>
+                <p id="shop-contact-display"></p>
+                <h2>Invoice</h2>
+                <p id="invoice-info-display"></p>
+            </div>
+            
+            <div class="details">
+                <p><strong>Bill To:</strong></p>
+                <p id="customer-display"></p>
+            </div>
+            
+            <table class="items">
+                <thead>
+                    <tr>
+                        <th>Product Name</th>
+                        <th>Weight (g)</th>
+                        <th>Purity (%)</th>
+                        <th>Type</th>
+                        <th>Rate (₹/g)</th>
+                        <th>Price (₹)</th>
+                    </tr>
+                </thead>
+                <tbody id="items-table"></tbody>
+            </table>
+            
+            <div class="total" id="total-display"></div>
+            
+            <div class="print-btn">
+                <button onclick="printInvoice()"><i class="fas fa-print"></i> 
+                
+                 <a href="9.html">Print Invoice</a>
+                
+                </button>
+            </div>
+            
+
+            
+            
+        </div>
+        
+        
+   <nav>
+        <button onclick="showSection('products')"><a href="2.html">BACK</a></button>
+    </nav>
+    
+    <script>
+        // Set current date on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('invoice-date').value = today;
+        });
+
+        function addItem() {
+            const container = document.getElementById('items-container');
+            const itemRow = document.createElement('div');
+            itemRow.className = 'item-row';
+            itemRow.innerHTML = `
+                <input type="text" placeholder="Product Name" required>
+                <input type="number" placeholder="Weight (g)" step="0.01" required>
+                <input type="number" placeholder="Purity (%)" min="1" max="100" required>
+                <select required>
+                    <option value="gold">Gold</option>
+                    <option value="silver">Silver</option>
+                </select>
+                <input type="number" placeholder="Current Rate (₹/g)" step="0.01" required>
+                <button type="button" class="remove-btn" onclick="removeItem(this)">Remove</button>
+            `;
+            container.appendChild(itemRow);
+        }
+
+        function removeItem(button) {
+            const row = button.parentElement;
+            if (document.querySelectorAll('.item-row').length > 1) {
+                row.remove();
+            } else {
+                alert('At least one item is required.');
+            }
+        }
+
+        function generateInvoice() {
+            const shopName = document.getElementById('shop-name').value;
+            const shopAddress = document.getElementById('shop-address').value;
+            const shopPhone = document.getElementById('shop-phone').value;
+            const shopEmail = document.getElementById('shop-email').value;
+            const invoiceNumber = document.getElementById('invoice-number').value;
+            const invoiceDate = document.getElementById('invoice-date').value;
+            const customerName = document.getElementById('customer-name').value;
+            const customerAddress = document.getElementById('customer-address').value;
+            const taxRate = parseFloat(document.getElementById('tax-rate').value) / 100;
+            
+            const itemRows = document.querySelectorAll('.item-row');
+            let subtotal = 0;
+            let itemsHtml = '';
+            
+            itemRows.forEach(row => {
+                const inputs = row.querySelectorAll('input, select');
+                const name = inputs[0].value;
+                const weight = parseFloat(inputs[1].value);
+                const purity = parseFloat(inputs[2].value);
+                const type = inputs[3].value;
+                const rate = parseFloat(inputs[4].value);
+                const price = (weight * (purity / 100) * rate);
+                subtotal += price;
+                itemsHtml += `<tr><td>${name}</td><td>${weight}g</td><td>${purity}%</td><td>${type.charAt(0).toUpperCase() + type.slice(1)}</td><td>₹${rate.toFixed(2)}</td><td>₹${price.toFixed(2)}</td></tr>`;
+            });
+            
+            const tax = subtotal * taxRate;
+            const grandTotal = subtotal + tax;
+            
+            document.getElementById('shop-name-display').textContent = shopName;
+            document.getElementById('shop-address-display').textContent = shopAddress;
+            document.getElementById('shop-contact-display').textContent = `Phone: ${shopPhone} | Email: ${shopEmail}`;
+            document.getElementById('invoice-info-display').textContent = `Invoice #: ${invoiceNumber} | Date: ${invoiceDate}`;
+            document.getElementById('customer-display').innerHTML = `Customer Name: ${customerName}<br>Address: ${customerAddress}`;
+            document.getElementById('items-table').innerHTML = itemsHtml;
+            document.getElementById('total-display').innerHTML = `<p>Subtotal: ₹${subtotal.toFixed(2)}</p><p>Tax (${(taxRate * 100).toFixed(2)}%): ₹${tax.toFixed(2)}</p><p>Grand Total: ₹${grandTotal.toFixed(2)}</p>`;
+            
+            document.getElementById('invoice-output').style.display = 'block';
+        }
+
+        function printInvoice() {
+          
+            alert('Thank you for your business!');
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom Gold Ornament Maker - Purchase & Calculate</title>
+    <link rel="stylesheet" href="style.css" />
+    
+</head>
+<body 1>
+    <div class="container"> 
+        <header>
+            <h1>🪙 RVJ Ornament Purchase</h1>
+            <p>Buy raw gold, make ornaments, calculate value (₹125,000 per 10g) + 5% GST</p>
+        </header>
+
+        <nav>
+            <button onclick="showSection('order')" class="active">
+                <a href="woek.html">HOME</a>
+            </button>
+            <button onclick="showSection('history')">Order History</button>
+             <button onclick="showSection('order')" class="active">Place Order</button>
+        </nav>
+
+        <!-- Place Order Section -->
+        <section id="order" class="active">
+          
+            <form id="order-form">
+                <label for="gold-weight">Gold Weight (grams, min 10g):</label>
+                <input type="number" id="gold-weight" min="10" max="10kg" value="10" step="0.1" required onchange="calculateTotal()">
+
+                <label for="ornament-type">Select Ornament Type (Making Charges):</label>
+                <select id="ornament-type" required onchange="calculateTotal()">
+                    <option value="">Choose...</option>
+                    <option value="necklace|5000">Necklace (₹5,000 making)</option>
+                    <option value="ring|2000">Ring (₹2,000 making)</option>
+                    <option value="earrings|3000">Earrings (₹3,000 making)</option>
+                    <option value="bangles|6000">Bangles (₹6,000 making)</option>
+                    <option value="pendant|1500">Pendant (₹1,500 making)</option>
+                    <option value="other|5000">other (₹5000making)</option>
+                    <option value="customisation|7000">customisation  jeellery (₹7000 making)</option>
+                </select>
+
+                <label for="customer-name">Full Name:</label>
+                <input type="text" id="customer-name" required>
+
+                <label for="email">Email:</label>
+                <input type="email" id="email" required>
+
+                <label for="address">Shipping Address:</label>
+                <textarea id="address" rows="3" required></textarea>
+
+                <button type="submit">Purchase & Confirm (Simulated)</button>
+            </form>
+
+            <div class="calculation-card" id="calculation" style="display: none;">
+                <h3>Price Breakdown</h3>
+                <div class="breakdown">
+                    <div>Gold Value (₹125,000 per 10g): <span id="gold-value">₹0</span></div>
+                    <div>Making Charges: <span id="making-charges">₹0</span></div>
+                    <div>GST (5%): <span id="gst">₹0</span></div>
+                </div>
+                <div class="total">Grand Total: <span id="grand-total">₹0</span></div>
+            </div>
+
+            <div id="confirmation">
+                <h3>Order Confirmed!</h3>
+                <p>Thank you! Order ID: <span id="order-id"></span><br>Weight: <span id="order-weight"></span>g | Ornament: <span id="order-ornament"></span><br>Total: ₹<span id="order-total"></span><br>Delivery in 5-7 days (after making).</p>
+            </div>
+        </section>
+
+        <!-- Order History Section -->
+        <section id="history">
+            <h2>Your Past Purchases</h2>
+            <button onclick="loadHistory()">Load History</button>
+            <div id="history-list"></div>
+            <button onclick="clearHistory()" style="background: #dc3545; margin-top: 10px; color: white; border: none; padding: 10px; border-radius: 5px;">Clear All</button>
+        </section>
+    </div>
+ <!-- Background video -->
+  <video autoplay muted loop class="video-bg" id="bgVideo">
+    <source src="exml.mp4" type="video/mp4">
+    Your browser does not support HTML5 video.
+  </video>
+
+  <nav>
+        <button onclick="showSection('products')"><a href="2.html">BACK</a></button>
+    </nav>
+
+     <script src="index.js"></script>
+</body>
+</html>

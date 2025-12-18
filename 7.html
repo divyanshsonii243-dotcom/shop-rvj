@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom Gold Ornament Maker - Purchase & Calculate</title>
+    <link rel="stylesheet" href="style.css" />
+    
+</head>
+
+  <div class="container">
+        <header>
+            <h1>🪙 RVJ Ornament Purchase</h1>
+            <p>Buy raw gold, make ornaments, calculate value (₹125,000 per 10g) + 5% GST</p>
+        </header>
+
+        <nav>
+            
+            <button onclick="showSection('history')">Order History</button>
+        </nav>
+
+        <!-- Place Order Section -->
+       
+
+            <div id="confirmation">
+                <h3>Order Confirmed!</h3>
+                <p>Thank you! Order ID: <span id="order-id"></span><br>Weight: <span id="order-weight"></span>g | Ornament: <span id="order-ornament"></span><br>Total: ₹<span id="order-total"></span><br>Delivery in 5-7 days (after making).</p>
+            </div>
+        </section>
+
+        <!-- Order History Section -->
+        <section id="history">
+            <h2>Your Past Purchases</h2>
+            <button onclick="loadHistory()">Load History</button>
+            <div id="history-list"></div>
+            <button onclick="clearHistory()" style="background: #dc3545; margin-top: 10px; color: white; border: none; padding: 10px; border-radius: 5px;">Clear All</button>
+        </section>
+    </div>
+
+
+
+
+
+
+
+
+
+
+    <nav>
+        <button onclick="showSection('products')"><a href="8.html">FINAL</a></button>
+    </nav>
+
+
+
+
+
+    
+
+     <script src="index.js"></script>
+</body>
+</html>
+
+
+          

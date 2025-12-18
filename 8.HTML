@@ -1,22 +1,23 @@
 <!DOCTYPE html>
-
-
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Professional Shop Invoice Generator</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"> <!-- For icons -->
-     
-   
- <style>
-       body {
- background-image: url('https://www.antarajewellery.com/wp-content/uploads/2025/04/Antara-Jan0092_v2-1-scaled.jpg');
-  background-position: center;
- 
-  position: relative;
-  text-align: center;
-  color: white;
-}
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-image: url('https://www.antarajewellery.com/wp-content/uploads/2025/04/Antara-Jan0092_v2-1-scaled.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed; /* Fixed on desktop */
+            position: relative;
+            text-align: center;
+            color: white;
+        }
         .container {
             max-width: 1000px;
             margin: 0 auto;
@@ -30,7 +31,7 @@
             margin-bottom: 30px;
         }
         header h1 {
-             color: #b8860b;
+            color: #b8860b;
             font-size: 2.5em;
             margin: 0;
         }
@@ -111,7 +112,6 @@
             background: #ccc;
         }
         .invoice {
-           
             border: 2px solid white;
             padding: 30px;
             margin-top: 30px;
@@ -171,6 +171,22 @@
             font-size: 0.9em;
             color: rgb(219, 216, 216);
         }
+        nav {
+            text-align: center;
+            margin-top: 20px;
+        }
+        nav button {
+            padding: 10px 20px;
+            background: #b8860b;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        nav button a {
+            color: white;
+            text-decoration: none;
+        }
         @media print {
             body { margin: 0; background: white; color: black; }
             .container { display: none; }
@@ -182,29 +198,86 @@
             }
             .print-btn { display: none; }
         }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+                background-attachment: scroll; /* Better performance on mobile */
+            }
+            .container {
+                max-width: 95%;
+                padding: 20px;
+            }
+            header h1 {
+                font-size: 2em;
+            }
+            header p {
+                font-size: 1em;
+            }
+            .form-group input, .form-group textarea, .form-group select {
+                padding: 12px;
+                font-size: 16px; /* Prevents zoom on iOS */
+            }
+            .item-row {
+                grid-template-columns: 1fr; /* Stack items vertically */
+                gap: 5px;
+            }
+            .item-row input, .item-row select {
+                padding: 10px;
+            }
+            .remove-btn, .add-item-btn {
+                width: 100%;
+                margin-top: 5px;
+            }
+            button {
+                padding: 12px 20px;
+                font-size: 1em;
+            }
+            .invoice {
+                padding: 20px;
+            }
+            .items {
+                font-size: 0.9em;
+                overflow-x: auto; /* Scroll horizontally if needed */
+            }
+            .print-btn button {
+                width: 100%;
+            }
+            nav button {
+                width: 100%;
+                padding: 12px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 15px;
+            }
+            header h1 {
+                font-size: 1.5em;
+            }
+            .form-group input, .form-group textarea, .form-group select {
+                padding: 14px;
+            }
+            .invoice {
+                padding: 15px;
+            }
+            .header h1 {
+                font-size: 1.5em;
+            }
+            .items th, .items td {
+                padding: 8px;
+                font-size: 0.8em;
+            }
+            .total {
+                font-size: 1em;
+            }
+            nav button {
+                padding: 14px;
+            }
+        }
     </style>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    </style>
-       
 </head>
 <body>
     <div class="container">
@@ -212,11 +285,6 @@
             <h1><i class="r"></i> 🪙RVJ</h1>
             <p>Online Gold Jewelry Sales - Choose, Customize & Buy Pure 22K Gold</em> | Base ₹125,000 per 10g + 15% GST</p>
         </header>
-   <div>
-
-    
-   </div> 
-     
         
         <form id="invoice-form">
             <div class="form-group">
@@ -263,7 +331,6 @@
                             <option value="gold">Gold</option>
                             <option value="silver">Silver</option>
                         </select>
-                        
                         <input type="number" placeholder="Current Rate (₹/g)" value="5000" step="0.01" required>
                         <button type="button" class="remove-btn" onclick="removeItem(this)">Remove</button>
                     </div>
@@ -309,22 +376,14 @@
             <div class="total" id="total-display"></div>
             
             <div class="print-btn">
-                <button onclick="printInvoice()"><i class="fas fa-print"></i> 
-                
-                 <a href="9.html">Print Invoice</a>
-                
-                </button>
+                <button onclick="window.location.href='9.html'"><i class="fas fa-print"></i> Print Invoice</button>
             </div>
-            
-
-            
-            
         </div>
         
-        
-   <nav>
-        <button onclick="showSection('products')"><a href="2.html">BACK</a></button>
-    </nav>
+        <nav>
+            <button onclick="showSection('products')"><a href="2.html">BACK</a></button>
+        </nav>
+    </div>
     
     <script>
         // Set current date on page load
@@ -402,7 +461,6 @@
         }
 
         function printInvoice() {
-          
             alert('Thank you for your business!');
         }
     </script>
